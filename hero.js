@@ -176,11 +176,26 @@ var moves = {
   // This hero will try really hard not to die.
   coward : function(gameData, helpers) {
     return helpers.findNearestHealthWell(gameData);
-  }
+  },
+
+  // RW Thief
+  rwThief: function(gameData, helpers) {
+    // Here, we ask if your hero's health is below 60
+    if (gameData.activeHero.health <= 60) {
+        // If it is, head towards the nearest health well
+        return helpers.findNearestHealthWell(gameData);
+    // Check if there's an unowned mine nearby and health is full
+    } else if (gameData.activeHero.health > 80){
+        return helpers.findNearestNonTeamDiamondMine(gameData);
+    } else {
+      // Otherwise, go attack someone weak.
+      return helpers.findNearestWeakerEnemy(gameData);
+    }
+  },
  };
 
 //  Set our heros strategy
-var  move =  moves.aggressor;
+var  move =  moves.rwThief;
 
 // Export the move function here
 module.exports = move;
