@@ -28,8 +28,17 @@ var heroMoveFunction = require('./hero.js');
 //The move function ("brain") the practice enemy will use
 var enemyMoveFunction = function(gameData, helpers) {
   //Move in a random direction
-  var choices = ['North', 'South', 'East', 'West'];
-  return choices[Math.floor(Math.random()*4)];
+  //var choices = ['North', 'South', 'East', 'West'];
+  //return choices[Math.floor(Math.random()*4)];
+
+  // Here, we ask if your hero's health is below 30
+  if (gameData.activeHero.health <= 30){
+    // If it is, head towards the nearest health well
+    return helpers.findNearestHealthWell(gameData);
+  } else {
+    // Otherwise, go attack someone...anyone.
+    return helpers.findNearestEnemy(gameData);
+  }
 }
 
 //Makes a new game with a 5x5 board

@@ -181,11 +181,11 @@ var moves = {
   // RW Thief
   rwThief: function(gameData, helpers) {
     // Here, we ask if your hero's health is below 60
-    if (gameData.activeHero.health <= 60) {
+    if (gameData.activeHero.health <= 50) {
         // If it is, head towards the nearest health well
         return helpers.findNearestHealthWell(gameData);
-    // Check if there's an unowned mine nearby and health is full
-    } else if (gameData.activeHero.health > 80){
+    // Check if there's an unowned mine nearby and health is high
+    } else if (gameData.activeHero.health >= 70){
         return helpers.findNearestNonTeamDiamondMine(gameData);
     } else {
       // Otherwise, go attack someone weak.
